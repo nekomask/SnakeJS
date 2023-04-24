@@ -37,7 +37,15 @@
         let apple = { x: 15, y: 15 };
         let score = 0;
 
-           
+        
+        function gameLoop() {
+            updateGame();
+            renderGame();
+            setTimeout(gameLoop, 1000 / 15); // 15 FPS
+        }
+
+
+           //Drawing Snake
            ctx.fillStyle = "#0f0";
             for (const segment of snake) {
                 ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);

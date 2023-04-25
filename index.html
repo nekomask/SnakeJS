@@ -45,11 +45,14 @@
             setTimeout(gameLoop, 1000 / 15); // 15 FPS
         }
 
+
+               // Update game state
         function updateGame() {
+            // Calculate new head position
             const head = { ...snake[0] };
             head.x += velocity.x;
             head.y += velocity.y;
-
+  // Check if snake hits the border or itself, and reset the game if it does
             if (head.x < 0 || head.y < 0 || head.x >= tileCount || head.y >= tileCount) {
                 return resetGame();
             }
@@ -59,9 +62,9 @@
                     return resetGame();
                 }
             }
-
+ // Add new head to the snake
             snake.unshift(head);
-
+   // Check if snake ate the apple
             if (head.x === apple.x && head.y === apple.y) {
                 score++;
                 moveApple();

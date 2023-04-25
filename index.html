@@ -45,6 +45,31 @@
             setTimeout(gameLoop, 1000 / 15); // 15 FPS
         }
 
+        function updateGame() {
+            const head = { ...snake[0] };
+            head.x += velocity.x;
+            head.y += velocity.y;
+
+            if (head.x < 0 || head.y < 0 || head.x >= tileCount || head.y >= tileCount) {
+                return resetGame();
+            }
+
+            for (const segment of snake.slice(1)) {
+                if (head.x === segment.x && head.y === segment.y) {
+                    return resetGame();
+                }
+            }
+
+            snake.unshift(head);
+
+            if (head.x === apple.x && head.y === apple.y) {
+                score++;
+                moveApple();
+            } else {
+                snake.pop();
+            }
+        }
+
 
         //Drawing Snake
         ctx.fillStyle = "#0f0";

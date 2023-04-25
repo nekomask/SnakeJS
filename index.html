@@ -74,6 +74,13 @@
         }
 
 
+// Move the apple to a random position
+function moveApple() {
+            apple.x = Math.floor(Math.random() * tileCount);
+            apple.y = Math.floor(Math.random() * tileCount);
+        }
+
+
         //Drawing Snake
         ctx.fillStyle = "#0f0";
         for (const segment of snake) {

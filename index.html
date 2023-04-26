@@ -73,6 +73,21 @@
             }
         }
 
+          // Reset game state
+        function resetGame() {
+            snake = [{ x: 10, y: 10 }];
+            velocity = { x: 0, y: 0 };
+            score = 0;
+            moveApple();
+        }
+
+        // Move the apple to a random position
+        function moveApple() {
+            apple.x = Math.floor(Math.random() * tileCount);
+            apple.y = Math.floor(Math.random() * tileCount);
+        }
+
+
 
     // Render game state on the canvas
         function renderGame() {
@@ -96,11 +111,7 @@
             ctx.fillText(`Score: ${score}`, 5, 20);
         }
 
-// Move the apple to a random position
-function moveApple() {
-            apple.x = Math.floor(Math.random() * tileCount);
-            apple.y = Math.floor(Math.random() * tileCount);
-        }
+
 
 
 

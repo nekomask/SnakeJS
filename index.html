@@ -111,7 +111,17 @@
             ctx.fillText(`Score: ${score}`, 5, 20);
         }
 
+  // Handle arrow key inputs for snake movement
+        function handleKeydown(event) {
+            const key = event.key;
+            if (key === "ArrowUp" && velocity.y === 0) velocity = { x: 0, y: -1 };
+            if (key === "ArrowDown" && velocity.y === 0) velocity = { x: 0, y: 1 };
+            if (key === "ArrowLeft" && velocity.x === 0) velocity = { x: -1, y: 0 };
+            if (key === "ArrowRight" && velocity.x === 0) velocity = { x: 1, y: 0 };
+        }
 
+        // Add event listener for keydown events
+        document.addEventListener("keydown", handleKeydown);
 
 
 // Start the game loop

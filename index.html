@@ -74,6 +74,28 @@
         }
 
 
+    // Render game state on the canvas
+        function renderGame() {
+            // Clear canvas and set background color
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw snake
+            ctx.fillStyle = "#0f0";
+            for (const segment of snake) {
+                ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
+            }
+
+            // Draw apple
+            ctx.fillStyle = "#f00";
+            ctx.fillRect(apple.x * gridSize, apple.y * gridSize, gridSize - 2, gridSize - 2);
+
+            // Draw score
+            ctx.fillStyle = "#fff";
+               ctx.font = "20px Arial";
+            ctx.fillText(`Score: ${score}`, 5, 20);
+        }
+
 // Move the apple to a random position
 function moveApple() {
             apple.x = Math.floor(Math.random() * tileCount);
@@ -81,11 +103,6 @@ function moveApple() {
         }
 
 
-        //Drawing Snake
-        ctx.fillStyle = "#0f0";
-        for (const segment of snake) {
-            ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
-        }
 
     </script>
 </body>

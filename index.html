@@ -20,7 +20,7 @@
 
 <body>
     <!-- creating and determining size of the game canvas-->
-    <canvas id="gameCanvas" width="800" height="800"></canvas>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
 
 
     <script>
@@ -71,7 +71,7 @@
             head.x += velocity.x;
             head.y += velocity.y;
             // Check if snake hits the border or itself, and reset the game if it does
-            if (head.x < 0 || head.y < 0 || head.x >= tileCount || head.y >= tileCount) {
+            if (head.x < 0 || head.y < 0 || head.x >= tileCountX || head.y >= tileCountY) {
                 return resetGame();
             }
 

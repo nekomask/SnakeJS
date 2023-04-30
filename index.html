@@ -19,26 +19,44 @@
     </style>
 
 <body>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <!-- creating and determining size of the game canvas-->
+    <canvas id="gameCanvas" width="800" height="800"></canvas>
+
+
     <script>
-        /* Get canvas and its 2D context
-        JS documentation on Canvas getContext:
+        /* Get canvas and its 2D context JS documentation on Canvas getContext:
         https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext */
 
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
 
-        // Set grid size and tile count
+        /** Set grid size and tile count **/
         const gridSize = 20;
+        const tileCountX = canvas.width / gridSize;
+        const tileCountY = canvas.height / gridSize;
+        //determines grid size of apple and snek && the tile units of space in which occupy the game canvas
+        //tileCountX: The number of horizontal tiles (cells) in the grid of the game canvas.
+        //tileCountY: The number of vertical tiles (cells) in the grid of the game canvas.
+
+
+
         const tileCount = canvas.width / gridSize;
 
-        // Initialize snake, velocity, apple, and score
+        /* Initialize snake, velocity, apple, and score */
         let snake = [{ x: 10, y: 10 }];
-        let velocity = { x: 0, y: 0 };
-        let apple = { x: 15, y: 15 };
-        let score = 0;
+        // x and y: determine starting position of snake 
 
-        // Main game loop
+        let velocity = { x: 0, y: 0 };
+        //determines the starting x and y velocity of the snake, must be an integer to avoid collision issues with the apple
+
+
+        let apple = { x: 15, y: 15 };
+        //determines starting position of apple on page load
+
+        let score = 0;
+        //initial score
+
+        /*** Main game loop ***/
         function gameLoop() {
             updateGame();
             renderGame();
@@ -46,13 +64,13 @@
         }
 
 
-               // Update game state
+        // Update game state
         function updateGame() {
             // Calculate new head position
             const head = { ...snake[0] };
             head.x += velocity.x;
             head.y += velocity.y;
-  // Check if snake hits the border or itself, and reset the game if it does
+            // Check if snake hits the border or itself, and reset the game if it does
             if (head.x < 0 || head.y < 0 || head.x >= tileCount || head.y >= tileCount) {
                 return resetGame();
             }
@@ -62,9 +80,9 @@
                     return resetGame();
                 }
             }
- // Add new head to the snake
+            // Add new head to the snake
             snake.unshift(head);
-   // Check if snake ate the apple
+            // Check if snake ate the apple
             if (head.x === apple.x && head.y === apple.y) {
                 score++;
                 moveApple();
@@ -73,7 +91,7 @@
             }
         }
 
-          // Reset game state
+        // Reset game state
         function resetGame() {
             snake = [{ x: 10, y: 10 }];
             velocity = { x: 0, y: 0 };
@@ -83,13 +101,13 @@
 
         // Move the apple to a random position
         function moveApple() {
-            apple.x = Math.floor(Math.random() * tileCount);
-            apple.y = Math.floor(Math.random() * tileCount);
+            apple.x = Math.floor(Math.random() * tileCountX);
+            apple.y = Math.floor(Math.random() * tileCountY);
         }
 
 
 
-    // Render game state on the canvas
+        // Render game state on the canvas
         function renderGame() {
             // Clear canvas and set background color
             ctx.fillStyle = "#000";
@@ -107,11 +125,11 @@
 
             // Draw score
             ctx.fillStyle = "#fff";
-               ctx.font = "20px Arial";
+            ctx.font = "20px Arial";
             ctx.fillText(`Score: ${score}`, 5, 20);
         }
 
-  // Handle arrow key inputs for snake movement
+        // Handle arrow key inputs for snake movement
         function handleKeydown(event) {
             const key = event.key;
             if (key === "ArrowUp" && velocity.y === 0) velocity = { x: 0, y: -1 };
@@ -124,7 +142,7 @@
         document.addEventListener("keydown", handleKeydown);
 
 
-// Start the game loop
+        // Start the game loop
         gameLoop();
     </script>
 </body>
